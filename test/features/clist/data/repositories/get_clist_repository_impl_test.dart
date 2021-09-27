@@ -1,0 +1,80 @@
+import 'package:clist/core/network/network_info.dart';
+import 'package:clist/features/clist/data/datasources/clist_local.dart';
+import 'package:clist/features/clist/data/datasources/clist_remote.dart';
+import 'package:clist/features/clist/data/models/clist_model.dart';
+import 'package:clist/features/clist/data/repositories/get_clist_repository_impl.dart';
+import 'package:clist/features/clist/domain/entities/clist_entity.dart';
+import 'package:dartz/dartz.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+
+class MockClitRemoteDataSource extends Mock implements ClistRemoteDataSource {}
+
+class MockLocalDataSource extends Mock implements CListLocalDataSource {}
+
+class MockNetworkInfo extends Mock implements NetworkInfo {}
+
+void main() {
+  MockClitRemoteDataSource mockClitRemoteDataSource =
+      MockClitRemoteDataSource();
+  MockLocalDataSource mockLocalDataSource = MockLocalDataSource();
+  MockNetworkInfo mockNetworkInfo = MockNetworkInfo();
+  GetClistRepositoryImpl clistRepositoryImpl = GetClistRepositoryImpl(
+      remoteDataSource: mockClitRemoteDataSource,
+      localDataSource: mockLocalDataSource,
+      networkInfo: mockNetworkInfo);
+
+  setUp(() {
+    mockClitRemoteDataSource = MockClitRemoteDataSource();
+    mockLocalDataSource = MockLocalDataSource();
+    mockNetworkInfo = MockNetworkInfo();
+    clistRepositoryImpl = GetClistRepositoryImpl(
+        remoteDataSource: mockClitRemoteDataSource,
+        localDataSource: mockLocalDataSource,
+        networkInfo: mockNetworkInfo);
+  });
+
+  group("get Clist", () {
+    test("should check if the device is online", () async {
+      //arrange
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+
+      //act
+      clistRepositoryImpl.getClist();
+
+      //assert
+      // verify(mockNetworkInfo.isConnected);
+    });
+  });
+  group("get Clist from remote data source when device is connected", () {
+    final cListModel = CListModel(
+        id: 12068175,
+        resources: {
+          "icon":
+              "/imagefit/static_resize/64x64/img/resources/codechef_com.ico",
+          "id": 2,
+          "name": "codechef.com"
+        },
+        event: "September Challenge 2018",
+        start: DateTime.parse("2018-09-07T09:30:00"),
+        end: DateTime.parse("2018-09-17T09:30:00"),
+        duration: 864000,
+        href: "https://www.codechef.com/SEPT18");
+
+    final CList cList = cListModel;
+    setUp(() {
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+    });
+    test(
+        "should return a remote data when the call to remote data is successful",
+        () async {
+      //arrange
+      when(clistRepositoryImpl.getClist())
+          .thenAnswer((_) async => Right(cListModel));
+      //act
+      final result = await clistRepositoryImpl.getClist();
+      //assert
+      expect(result, Right(cList));
+    });
+  });
+}
