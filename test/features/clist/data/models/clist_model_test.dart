@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:clist/features/clist/data/models/clist_model.dart';
 import 'package:clist/features/clist/domain/entities/clist_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 import 'dart:io';
 
 void main() {
@@ -28,7 +27,7 @@ void main() {
               as Map<String, dynamic>;
 
       //act
-      final result = new CListModel.fromJson(jsonMap);
+      final result = new CListModel.fromJson(jsonMap["objects"][0]);
       //assert
       expect(result, cListModel);
     });

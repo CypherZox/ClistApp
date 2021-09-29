@@ -5,21 +5,25 @@ import 'package:clist/features/clist/data/models/clist_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class CListLocalDataSource {
-  Future<CListModel>? getLastCList();
-  Future<void>? cacheCList(CListModel cListModel);
+  Future<List<CListModel?>?>? getLastCList();
+  Future<void>? cacheCList(List<CListModel?>? cListModel);
 }
 
 class CListLocalDataSourceImpl implements CListLocalDataSource {
   final SharedPreferences sharedPreferences;
   CListLocalDataSourceImpl({required this.sharedPreferences});
   @override
-  Future<void>? cacheCList(CListModel cListModel) {}
+  Future<void>? cacheCList(List<CListModel?>? cListModel) {}
 
   @override
-  Future<CListModel>? getLastCList() {
+  Future<List<CListModel?>?>? getLastCList() {
     final jsonString = sharedPreferences.getString('CACHED_CLIST');
     if (jsonString != null) {
-      return Future.value(CListModel.fromJson(json.decode(jsonString)));
+      final jsonMap = json.decode(jsonString);
+      final List<CListModel> clist = jsonMap["objects"]
+          .map<CListModel>((item) => CListModel.fromJson(item))
+          .toList() as List<CListModel>;
+      return Future.value(clist);
     } else {
       throw CacheException();
     }

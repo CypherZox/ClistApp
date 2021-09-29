@@ -1,3 +1,4 @@
+import 'package:clist/core/errors/failures.dart';
 import 'package:clist/features/clist/domain/entities/clist_entity.dart';
 import 'package:clist/features/clist/domain/repositories/clist_repository.dart';
 import 'package:clist/features/clist/domain/usecases/get_clist.dart';
@@ -24,12 +25,14 @@ void main() {
       end: DateTime.now(),
       duration: 10,
       href: "href");
-  test("Get List shoul return Clist from repository ", () async {
+  test("Get List shoul return a list of Clist items from repository ",
+      () async {
     //assert
-    when(mockCListRepository.getClist()).thenAnswer((_) async => Right(cList));
+    when(mockCListRepository.getClist())
+        .thenAnswer((_) async => Right([cList]));
     //act
     final result = await usecase.call();
     //arrange
-    expect(result, Right(cList));
+    expect(result!.isRight(), equals(true));
   });
 }

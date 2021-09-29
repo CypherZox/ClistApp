@@ -1,4 +1,13 @@
 {
+  "meta": {
+    "limit": 100,
+    "next": "/api/v1/contest/?limit=100&offset=100",
+    "offset": 0,
+    "previous": null,
+    "total_count": 20983
+  },
+  "objects": [
+  {
   "duration": 864000,
   "end": "2018-09-17T09:30:00",
   "event": "September Challenge 2018",
@@ -10,4 +19,6 @@
     "name": "codechef.com"
   },
   "start": "2018-09-07T09:30:00"
+  } 
+]
 }

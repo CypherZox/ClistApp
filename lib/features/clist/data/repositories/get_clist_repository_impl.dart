@@ -2,7 +2,6 @@ import 'package:clist/core/errors/exception.dart';
 import 'package:clist/core/network/network_info.dart';
 import 'package:clist/features/clist/data/datasources/clist_local.dart';
 import 'package:clist/features/clist/data/datasources/clist_remote.dart';
-import 'package:clist/features/clist/data/models/clist_model.dart';
 import 'package:clist/features/clist/domain/entities/clist_entity.dart';
 import 'package:clist/core/errors/failures.dart';
 import 'package:clist/features/clist/domain/repositories/clist_repository.dart';
@@ -18,7 +17,7 @@ class GetClistRepositoryImpl implements GetClistRepository {
       required this.localDataSource});
 
   @override
-  Future<Either<Failure?, CList?>>? getClist() async {
+  Future<Either<Failure?, List<CList?>?>>? getClist() async {
     bool isConnected;
     if (await networkInfo.isConnected != null) {
       isConnected = (await networkInfo.isConnected)!;

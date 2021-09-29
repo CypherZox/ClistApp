@@ -45,11 +45,10 @@ void main() {
       clistRepositoryImpl.getClist();
 
       //assert
-      // verify(mockNetworkInfo.isConnected);
+      verify(mockNetworkInfo.isConnected);
     });
   });
   group("get Clist from remote data source when device is connected", () {
-    ServerFailure? serverFailure = ServerFailure();
     final cListModel = CListModel(
         id: 12068175,
         resources: {
@@ -71,13 +70,13 @@ void main() {
     test("should return a Clist entity", () async {
       //arrange
       when(mockClitRemoteDataSource.getCList())
-          .thenAnswer((_) async => cListModel);
+          .thenAnswer((_) async => [cListModel]);
       //act
       final result = await clistRepositoryImpl.getClist();
       //assert
       verify(mockClitRemoteDataSource.getCList());
-      verify(mockLocalDataSource.cacheCList(cListModel));
-      expect(result, equals(Right(cList)));
+      verify(mockLocalDataSource.cacheCList([cListModel]));
+      expect(result!.isRight(), equals(true));
     });
 
     test(
@@ -113,13 +112,13 @@ void main() {
     test("should return last cList if the device is offline", () async {
       //arrange
       when(mockLocalDataSource.getLastCList())
-          .thenAnswer((_) async => cListModel);
+          .thenAnswer((_) async => [cListModel]);
       //act
       final result = await clistRepositoryImpl.getClist();
       //assert
       verifyZeroInteractions(mockClitRemoteDataSource);
       verify(clistRepositoryImpl.getClist());
-      expect(result, Right(cList));
+      expect(result!.isRight(), equals(true));
     });
     test(
         "should return a cache failure if the call to local data source is unsuccessful",
