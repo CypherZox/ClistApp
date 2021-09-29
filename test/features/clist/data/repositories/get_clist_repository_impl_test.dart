@@ -1,3 +1,5 @@
+import 'package:clist/core/errors/exception.dart';
+import 'package:clist/core/errors/failures.dart';
 import 'package:clist/core/network/network_info.dart';
 import 'package:clist/features/clist/data/datasources/clist_local.dart';
 import 'package:clist/features/clist/data/datasources/clist_remote.dart';
@@ -47,6 +49,7 @@ void main() {
     });
   });
   group("get Clist from remote data source when device is connected", () {
+    ServerFailure? serverFailure = ServerFailure();
     final cListModel = CListModel(
         id: 12068175,
         resources: {
@@ -65,16 +68,68 @@ void main() {
     setUp(() {
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
     });
-    test(
-        "should return a remote data when the call to remote data is successful",
-        () async {
+    test("should return a Clist entity", () async {
       //arrange
-      when(clistRepositoryImpl.getClist())
-          .thenAnswer((_) async => Right(cListModel));
+      when(mockClitRemoteDataSource.getCList())
+          .thenAnswer((_) async => cListModel);
       //act
       final result = await clistRepositoryImpl.getClist();
       //assert
+      verify(mockClitRemoteDataSource.getCList());
+      verify(mockLocalDataSource.cacheCList(cListModel));
+      expect(result, equals(Right(cList)));
+    });
+
+    test(
+        "should return server exception when the call to remote data source isn't successful",
+        () async {
+      //arrange
+      when(mockClitRemoteDataSource.getCList()).thenThrow(ServerException());
+      //act
+      final result = await clistRepositoryImpl.getClist();
+      //assert
+      expect(result, equals(Left(ServerFailure())));
+    });
+  });
+  group("dveice is offline", () {
+    final cListModel = CListModel(
+        id: 12068175,
+        resources: {
+          "icon":
+              "/imagefit/static_resize/64x64/img/resources/codechef_com.ico",
+          "id": 2,
+          "name": "codechef.com"
+        },
+        event: "September Challenge 2018",
+        start: DateTime.parse("2018-09-07T09:30:00"),
+        end: DateTime.parse("2018-09-17T09:30:00"),
+        duration: 864000,
+        href: "https://www.codechef.com/SEPT18");
+
+    final CList cList = cListModel;
+    setUp(() async {
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
+    });
+    test("should return last cList if the device is offline", () async {
+      //arrange
+      when(mockLocalDataSource.getLastCList())
+          .thenAnswer((_) async => cListModel);
+      //act
+      final result = await clistRepositoryImpl.getClist();
+      //assert
+      verifyZeroInteractions(mockClitRemoteDataSource);
+      verify(clistRepositoryImpl.getClist());
       expect(result, Right(cList));
+    });
+    test(
+        "should return a cache failure if the call to local data source is unsuccessful",
+        () async {
+      //arrange
+      when(mockLocalDataSource.getLastCList()).thenThrow(CacheException());
+      //act
+      final result = await clistRepositoryImpl.getClist();
+      //assert
+      expect(result, Left(CacheFailure()));
     });
   });
 }

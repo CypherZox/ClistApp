@@ -47,4 +47,15 @@ class CListModel extends CList {
       'href': href
     };
   }
+
+  CList toEntity() {
+    return CList(
+        id: this.id,
+        resources: this.resources,
+        event: this.event,
+        start: this.start,
+        end: this.end,
+        duration: this.duration,
+        href: this.href);
+  }
 }

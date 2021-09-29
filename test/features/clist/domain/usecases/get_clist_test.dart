@@ -3,13 +3,10 @@ import 'package:clist/features/clist/domain/repositories/clist_repository.dart';
 import 'package:clist/features/clist/domain/usecases/get_clist.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-@GenerateMocks([GetClistRepository])
 class MockCListRepository extends Mock implements GetClistRepository {}
 
-@GenerateMocks([MockCListRepository])
 void main() {
   MockCListRepository mockCListRepository = MockCListRepository();
   GetCList usecase = GetCList(mockCListRepository);

@@ -2,6 +2,7 @@ import 'package:clist/core/errors/exception.dart';
 import 'package:clist/core/network/network_info.dart';
 import 'package:clist/features/clist/data/datasources/clist_local.dart';
 import 'package:clist/features/clist/data/datasources/clist_remote.dart';
+import 'package:clist/features/clist/data/models/clist_model.dart';
 import 'package:clist/features/clist/domain/entities/clist_entity.dart';
 import 'package:clist/core/errors/failures.dart';
 import 'package:clist/features/clist/domain/repositories/clist_repository.dart';
@@ -17,9 +18,30 @@ class GetClistRepositoryImpl implements GetClistRepository {
       required this.localDataSource});
 
   @override
-  Future<Either<Failure?, CList?>?>? getClist() async {
-    networkInfo.isConnected;
-    // final remoteClist = await remoteDataSource.getClist();
-    return Right(await remoteDataSource.getClist());
+  Future<Either<Failure?, CList?>>? getClist() async {
+    bool isConnected;
+    if (await networkInfo.isConnected != null) {
+      isConnected = (await networkInfo.isConnected)!;
+    } else {
+      isConnected = false;
+    }
+    if (isConnected) {
+      try {
+        final remoteClist = await remoteDataSource.getCList();
+        if (remoteClist != null) {
+          localDataSource.cacheCList(remoteClist);
+        }
+
+        return Right(remoteClist);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    }
+    try {
+      final localClist = await localDataSource.getLastCList();
+      return Right(localClist);
+    } on CacheException {
+      return Left(CacheFailure());
+    }
   }
 }
