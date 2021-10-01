@@ -4,3 +4,8 @@ class ApiConstants {
   static Uri uri = Uri.parse(uriString);
   static Map<String, String> header = {'Content-Type': 'application/json'};
 }
+
+class ErrorMessages {
+  static String SERVER_FAILURE_MESSAGE = "A server failure accured";
+  static String CACHE_FAILURE_MESSAGE = "A cache failure accured";
+}
