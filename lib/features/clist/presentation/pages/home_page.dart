@@ -1,4 +1,8 @@
+import 'package:clist/features/clist/presentation/changenotifiers/clist_states.dart';
+import 'package:clist/features/clist/presentation/changenotifiers/list_change_notifiers.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../injection_container.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,12 +14,29 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final clistProvider = sl<ClistProvider>();
     return Scaffold(
         body: SafeArea(
-      child: ListView.builder(
-          itemCount: 4,
-          itemBuilder: (BuildContext context, int index) {
-            return Text("");
+      child: StreamBuilder<ClistState>(
+          stream: clistProvider.getClistState(),
+          builder: (context, state) {
+            if (state.data is Loading) {
+              return Center(
+                child: Text("loading"),
+              );
+            } else if (state.data is Loaded) {
+              return Center(
+                child: MaterialButton(
+                  onPressed: () {
+                    print(state.data!.props.runtimeType);
+                  },
+                ),
+              );
+            } else if (state.data is Error) {
+              return Text("${state.data!.props}");
+            } else {
+              return Text("${state.data}");
+            }
           }),
     ));
   }

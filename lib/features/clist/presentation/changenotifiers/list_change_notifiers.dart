@@ -1,6 +1,5 @@
 import 'package:clist/config/constants/api_constants.dart';
 import 'package:clist/core/errors/failures.dart';
-import 'package:clist/features/clist/data/repositories/get_clist_repository_impl.dart';
 import 'package:clist/features/clist/domain/entities/clist_entity.dart';
 import 'package:clist/features/clist/domain/usecases/get_clist.dart';
 import 'package:clist/features/clist/presentation/changenotifiers/clist_states.dart';
@@ -34,9 +33,9 @@ Stream<ClistState> _eitherLoadedOrErrorState(
 String _mapFailureToMessage(Failure failure) {
   switch (failure.runtimeType) {
     case ServerFailure:
-      return ErrorMessages.SERVER_FAILURE_MESSAGE;
+      return ErrorMessages.serverFailureMessage;
     case CacheFailure:
-      return ErrorMessages.CACHE_FAILURE_MESSAGE;
+      return ErrorMessages.cacheFailureMessage;
     default:
       return 'Unexpected error';
   }

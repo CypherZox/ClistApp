@@ -30,7 +30,6 @@ class GetClistRepositoryImpl implements GetClistRepository {
         if (remoteClist != null) {
           localDataSource.cacheCList(remoteClist);
         }
-
         return Right(remoteClist);
       } on ServerException {
         return Left(ServerFailure());

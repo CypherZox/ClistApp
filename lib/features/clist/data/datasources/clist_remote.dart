@@ -15,14 +15,17 @@ class ClistRemoteDataSourceImpl implements ClistRemoteDataSource {
 
   @override
   Future<List<CListModel?>?>? getCList() async {
-    final http.Response response =
-        await httpClient.get(ApiConstants.uri, headers: ApiConstants.header);
+    final http.Response response = await httpClient.get(
+      ApiConstants.uri,
+      headers: ApiConstants.header,
+    );
     if (response.statusCode == 200) {
       final jsonMap = json.decode(response.body);
       return jsonMap["objects"]
           .map<CListModel>((item) => CListModel.fromJson(item))
           .toList();
     } else {
+      print(response.statusCode);
       throw ServerException();
     }
   }

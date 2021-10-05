@@ -6,6 +6,6 @@ class ApiConstants {
 }
 
 class ErrorMessages {
-  static String SERVER_FAILURE_MESSAGE = "A server failure accured";
-  static String CACHE_FAILURE_MESSAGE = "A cache failure accured";
+  static String serverFailureMessage = "A server failure occured";
+  static String cacheFailureMessage = "A cache failure occured";
 }

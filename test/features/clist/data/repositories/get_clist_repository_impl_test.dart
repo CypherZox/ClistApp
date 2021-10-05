@@ -5,7 +5,6 @@ import 'package:clist/features/clist/data/datasources/clist_local.dart';
 import 'package:clist/features/clist/data/datasources/clist_remote.dart';
 import 'package:clist/features/clist/data/models/clist_model.dart';
 import 'package:clist/features/clist/data/repositories/get_clist_repository_impl.dart';
-import 'package:clist/features/clist/domain/entities/clist_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -63,7 +62,7 @@ void main() {
         duration: 864000,
         href: "https://www.codechef.com/SEPT18");
 
-    final CList cList = cListModel;
+    // final CList cList = cListModel;
     setUp(() {
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
     });
@@ -105,7 +104,7 @@ void main() {
         duration: 864000,
         href: "https://www.codechef.com/SEPT18");
 
-    final CList cList = cListModel;
+    // final CList cList = cListModel;
     setUp(() async {
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
     });

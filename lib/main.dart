@@ -1,7 +1,20 @@
+import 'package:clist/features/clist/presentation/changenotifiers/list_change_notifiers.dart';
+import 'package:clist/features/clist/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'injection_container.dart' as di;
 
-void main() {
-  runApp(MyApp());
+import 'injection_container.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => sl<ClistProvider>())
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -9,11 +22,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Container(),
+      home: HomePage(),
     );
   }
 }
