@@ -50,12 +50,7 @@ void main() {
   group("get Clist from remote data source when device is connected", () {
     final cListModel = CListModel(
         id: 12068175,
-        resources: {
-          "icon":
-              "/imagefit/static_resize/64x64/img/resources/codechef_com.ico",
-          "id": 2,
-          "name": "codechef.com"
-        },
+        resource: "",
         event: "September Challenge 2018",
         start: DateTime.parse("2018-09-07T09:30:00"),
         end: DateTime.parse("2018-09-17T09:30:00"),
@@ -92,12 +87,7 @@ void main() {
   group("dveice is offline", () {
     final cListModel = CListModel(
         id: 12068175,
-        resources: {
-          "icon":
-              "/imagefit/static_resize/64x64/img/resources/codechef_com.ico",
-          "id": 2,
-          "name": "codechef.com"
-        },
+        resource: "",
         event: "September Challenge 2018",
         start: DateTime.parse("2018-09-07T09:30:00"),
         end: DateTime.parse("2018-09-17T09:30:00"),

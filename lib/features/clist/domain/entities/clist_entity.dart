@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class CList extends Equatable {
   final int id;
-  final Map resources;
+  final String resource;
   final String event;
   final DateTime start;
   final DateTime end;
@@ -11,11 +11,11 @@ class CList extends Equatable {
 
   CList(
       {required this.id,
-      required this.resources,
+      required this.resource,
       required this.event,
       required this.start,
       required this.end,
       required this.duration,
       required this.href});
-  List<Object> get props => [id, resources, event, start, end, duration, href];
+  List<Object> get props => [id, resource, event, start, end, duration, href];
 }

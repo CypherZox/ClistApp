@@ -1,4 +1,5 @@
 import 'package:clist/features/clist/presentation/changenotifiers/list_change_notifiers.dart';
+import 'package:clist/features/clist/presentation/pages/home_glass.dart';
 import 'package:clist/features/clist/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: GlassHome(
+        start: 0.9,
+        end: 0.1,
+      ),
     );
   }
 }

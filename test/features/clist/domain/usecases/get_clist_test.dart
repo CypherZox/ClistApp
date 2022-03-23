@@ -18,7 +18,7 @@ void main() {
 
   final CList cList = CList(
       id: 1,
-      resources: {"resources": ""},
+      resource: "",
       event: "event",
       start: DateTime.now(),
       end: DateTime.now(),

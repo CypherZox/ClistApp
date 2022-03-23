@@ -3,12 +3,14 @@ import 'dart:convert';
 import 'package:clist/core/errors/exception.dart';
 import 'package:clist/features/clist/data/models/clist_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:injectable/injectable.dart';
 
 abstract class CListLocalDataSource {
   Future<List<CListModel?>?>? getLastCList();
   Future<void>? cacheCList(List<CListModel?>? cListModel);
 }
 
+@LazySingleton(as: CListLocalDataSource)
 class CListLocalDataSourceImpl implements CListLocalDataSource {
   final SharedPreferences sharedPreferences;
   CListLocalDataSourceImpl({required this.sharedPreferences});

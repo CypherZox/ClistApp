@@ -8,11 +8,7 @@ import 'dart:io';
 void main() {
   final cListModel = CListModel(
       id: 12068175,
-      resources: {
-        "icon": "/imagefit/static_resize/64x64/img/resources/codechef_com.ico",
-        "id": 2,
-        "name": "codechef.com"
-      },
+      resource: "",
       event: "September Challenge 2018",
       start: DateTime.parse("2018-09-07T09:30:00"),
       end: DateTime.parse("2018-09-17T09:30:00"),
@@ -41,12 +37,7 @@ void main() {
         "event": "September Challenge 2018",
         "href": "https://www.codechef.com/SEPT18",
         "id": 12068175,
-        "resource": {
-          "icon":
-              "/imagefit/static_resize/64x64/img/resources/codechef_com.ico",
-          "id": 2,
-          "name": "codechef.com"
-        },
+        "resource": "",
         "start": "2018-09-07T09:30:00"
       };
 
