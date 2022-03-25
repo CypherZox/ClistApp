@@ -3,43 +3,47 @@ import 'package:intl/intl.dart';
 
 class CListModel extends CList {
   final int id;
-  final String resource;
+  final int resourceId;
   final String event;
   final DateTime start;
   final DateTime end;
   final int duration;
   final String href;
+  final String icon;
   CListModel(
       {required this.id,
-      required this.resource,
+      required this.resourceId,
       required this.event,
       required this.start,
       required this.end,
       required this.duration,
-      required this.href})
+      required this.href,
+      required this.icon})
       : super(
             duration: duration,
             id: id,
-            resource: resource,
+            resourceId: resourceId,
             event: event,
             start: start,
             end: end,
-            href: href);
-  List<Object> get props => [id, resource, event, start, end, duration, href];
+            href: href,
+            icon: icon);
+  List<Object> get props => [id, resourceId, event, start, end, duration, href];
   factory CListModel.fromJson(Map<String, dynamic> json) {
     return CListModel(
         id: json['id'],
-        resource: json['resource'],
+        resourceId: json['resource_id'],
         event: json['event'],
         start: DateTime.parse(json['start']),
         end: DateTime.parse(json['end']),
         duration: json['duration'],
-        href: json['href']);
+        href: json['href'],
+        icon: '');
   }
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'resource': resource,
+      'resource_id': resourceId,
       'event': event,
       'start': DateFormat('yyyy-MM-ddTHH:mm:ss').format(start),
       'end': DateFormat('yyyy-MM-ddTHH:mm:ss').format(end),
@@ -51,11 +55,12 @@ class CListModel extends CList {
   CList toEntity() {
     return CList(
         id: this.id,
-        resource: this.resource,
+        resourceId: this.resourceId,
         event: this.event,
         start: this.start,
         end: this.end,
         duration: this.duration,
-        href: this.href);
+        href: this.href,
+        icon: '');
   }
 }

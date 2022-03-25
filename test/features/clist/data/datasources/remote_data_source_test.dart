@@ -37,7 +37,8 @@ void main() {
       //act
       final response = await clistRemoteDataSourceImpl.getCList();
       //assert
-      verify(httpClient.get(ApiConstants.uri, headers: ApiConstants.header));
+      verify(httpClient.get(ApiConstants.uri('2022-03-24'),
+          headers: ApiConstants.header));
       expect(response, cListModelList);
     });
     test(

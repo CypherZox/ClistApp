@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class CListLocalDataSource {
-  Future<List<CListModel?>?>? getLastCList();
+  Future<List<CListModel>> getLastCList();
   Future<void>? cacheCList(List<CListModel?>? cListModel);
 }
 
@@ -18,7 +18,7 @@ class CListLocalDataSourceImpl implements CListLocalDataSource {
   Future<void>? cacheCList(List<CListModel?>? cListModel) {}
 
   @override
-  Future<List<CListModel?>?>? getLastCList() {
+  Future<List<CListModel>> getLastCList() {
     final jsonString = sharedPreferences.getString('CACHED_CLIST');
     if (jsonString != null) {
       final jsonMap = json.decode(jsonString);

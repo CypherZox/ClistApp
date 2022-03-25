@@ -5,9 +5,10 @@ import 'package:clist/core/errors/exception.dart';
 import 'package:clist/features/clist/data/models/clist_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 
 abstract class ClistRemoteDataSource {
-  Future<List<CListModel?>?>? getCList();
+  Future<List<CListModel>> getCList();
 }
 
 @LazySingleton(as: ClistRemoteDataSource)
@@ -16,9 +17,12 @@ class ClistRemoteDataSourceImpl implements ClistRemoteDataSource {
   ClistRemoteDataSourceImpl({required this.httpClient});
 
   @override
-  Future<List<CListModel?>?>? getCList() async {
+  Future<List<CListModel>> getCList() async {
+    var now = new DateTime.now();
+    var formatter = new DateFormat('yyyy-MM-dd');
+    String formattedDate = formatter.format(now);
     final http.Response response = await httpClient.get(
-      ApiConstants.uri,
+      ApiConstants.uri(formattedDate),
       headers: ApiConstants.header,
     );
     if (response.statusCode == 200) {

@@ -36,6 +36,10 @@ dependencies:
   provider: ^6.0.1
   get_it: ^7.2.0
   glassmorphism_ui: ^0.2.0
+  flutter_bloc: ^8.0.0
+  bloc: ^8.0.1
+  flutter_countdown_timer: ^4.1.0
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
   injectable_generator:

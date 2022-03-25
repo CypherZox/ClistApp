@@ -3,5 +3,5 @@ import 'package:clist/features/clist/domain/entities/clist_entity.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class GetClistRepository {
-  Future<Either<Failure?, List<CList?>?>?>? getClist();
+  Future<Either<Failure, List<CList>>> getClist();
 }

@@ -11,9 +11,9 @@ class Loading extends ClistState {}
 class Empty extends ClistState {}
 
 class Loaded extends ClistState {
-  final List<CList?>? clist;
+  final List<CList> clist;
   Loaded({required this.clist});
-  List<Object> get props => [clist!];
+  List<Object> get props => [clist];
 }
 
 class Error extends ClistState {

@@ -1,36 +1,33 @@
-import 'package:clist/features/clist/presentation/changenotifiers/list_change_notifiers.dart';
-import 'package:clist/features/clist/presentation/pages/home_glass.dart';
-import 'package:clist/features/clist/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'injection_container.dart' as di;
-
-import 'injection_container.dart';
+import 'features/clist/presentation/bloc/bloc.dart';
+import 'features/clist/presentation/pages/home_page.dart';
+import 'features/clist_resource/presentation/bloc/clist_bloc.dart';
+import 'injection.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await di.init();
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (context) => sl<ClistProvider>())
-    ],
-    child: MyApp(),
-  ));
+  await ConfigureInjection();
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: GlassHome(
-        start: 0.9,
-        end: 0.1,
+    return MultiProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt<ClistBloc>()),
+        BlocProvider(create: (_) => getIt<ClistResourceBloc>()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: HomePage(),
       ),
     );
   }

@@ -7,39 +7,54 @@ import 'package:clist/features/clist/data/models/clist_model.dart';
 import 'package:clist/features/clist/data/repositories/get_clist_repository_impl.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-class MockClitRemoteDataSource extends Mock implements ClistRemoteDataSource {}
+import 'get_clist_repository_impl_test.mocks.dart';
 
-class MockLocalDataSource extends Mock implements CListLocalDataSource {}
+// class MockClitRemoteDataSource extends Mock implements ClistRemoteDataSource {}
 
-class MockNetworkInfo extends Mock implements NetworkInfo {}
+// class MockLocalDataSource extends Mock implements CListLocalDataSource {}
 
+// class MockNetworkInfo extends Mock implements NetworkInfo {}
+@GenerateMocks([
+  CListLocalDataSource,
+  NetworkInfo
+], customMocks: [
+  MockSpec<ClistRemoteDataSource>(
+      as: #MockClistRemoteDataSource, returnNullOnMissingStub: true)
+])
 void main() {
-  MockClitRemoteDataSource mockClitRemoteDataSource =
-      MockClitRemoteDataSource();
-  MockLocalDataSource mockLocalDataSource = MockLocalDataSource();
-  MockNetworkInfo mockNetworkInfo = MockNetworkInfo();
-  GetClistRepositoryImpl clistRepositoryImpl = GetClistRepositoryImpl(
-      remoteDataSource: mockClitRemoteDataSource,
-      localDataSource: mockLocalDataSource,
-      networkInfo: mockNetworkInfo);
+  late MockClistRemoteDataSource mockClitRemoteDataSource;
+  late MockCListLocalDataSource mockLocalDataSource;
+  late MockNetworkInfo mockNetworkInfo;
+  late GetClistRepositoryImpl clistRepositoryImpl;
 
   setUp(() {
-    mockClitRemoteDataSource = MockClitRemoteDataSource();
-    mockLocalDataSource = MockLocalDataSource();
+    mockClitRemoteDataSource = MockClistRemoteDataSource();
+    mockLocalDataSource = MockCListLocalDataSource();
     mockNetworkInfo = MockNetworkInfo();
     clistRepositoryImpl = GetClistRepositoryImpl(
         remoteDataSource: mockClitRemoteDataSource,
         localDataSource: mockLocalDataSource,
         networkInfo: mockNetworkInfo);
   });
+  final cListModel = CListModel(
+      id: 12068175,
+      resourceId: 1,
+      icon: "",
+      event: "September Challenge 2018",
+      start: DateTime.parse("2018-09-07T09:30:00"),
+      end: DateTime.parse("2018-09-17T09:30:00"),
+      duration: 864000,
+      href: "https://www.codechef.com/SEPT18");
 
   group("get Clist", () {
     test("should check if the device is online", () async {
       //arrange
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-
+      when(mockClitRemoteDataSource.getCList())
+          .thenAnswer((_) async => [cListModel]);
       //act
       clistRepositoryImpl.getClist();
 
@@ -48,15 +63,6 @@ void main() {
     });
   });
   group("get Clist from remote data source when device is connected", () {
-    final cListModel = CListModel(
-        id: 12068175,
-        resource: "",
-        event: "September Challenge 2018",
-        start: DateTime.parse("2018-09-07T09:30:00"),
-        end: DateTime.parse("2018-09-17T09:30:00"),
-        duration: 864000,
-        href: "https://www.codechef.com/SEPT18");
-
     // final CList cList = cListModel;
     setUp(() {
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
@@ -70,7 +76,7 @@ void main() {
       //assert
       verify(mockClitRemoteDataSource.getCList());
       verify(mockLocalDataSource.cacheCList([cListModel]));
-      expect(result!.isRight(), equals(true));
+      expect(result.isRight(), equals(true));
     });
 
     test(
@@ -86,8 +92,9 @@ void main() {
   });
   group("dveice is offline", () {
     final cListModel = CListModel(
+        icon: "",
         id: 12068175,
-        resource: "",
+        resourceId: 1,
         event: "September Challenge 2018",
         start: DateTime.parse("2018-09-07T09:30:00"),
         end: DateTime.parse("2018-09-17T09:30:00"),
@@ -107,7 +114,7 @@ void main() {
       //assert
       verifyZeroInteractions(mockClitRemoteDataSource);
       verify(clistRepositoryImpl.getClist());
-      expect(result!.isRight(), equals(true));
+      expect(result.isRight(), equals(true));
     });
     test(
         "should return a cache failure if the call to local data source is unsuccessful",

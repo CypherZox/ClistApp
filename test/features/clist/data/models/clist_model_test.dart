@@ -7,8 +7,9 @@ import 'dart:io';
 
 void main() {
   final cListModel = CListModel(
+      icon: "",
       id: 12068175,
-      resource: "",
+      resourceId: 1,
       event: "September Challenge 2018",
       start: DateTime.parse("2018-09-07T09:30:00"),
       end: DateTime.parse("2018-09-17T09:30:00"),

@@ -3,22 +3,25 @@ import 'package:clist/features/clist/domain/repositories/clist_repository.dart';
 import 'package:clist/features/clist/domain/usecases/get_clist.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-class MockCListRepository extends Mock implements GetClistRepository {}
+import 'get_clist_test.mocks.dart';
 
+@GenerateMocks([GetClistRepository])
 void main() {
-  MockCListRepository mockCListRepository = MockCListRepository();
-  GetCList usecase = GetCList(mockCListRepository);
+  late final MockGetClistRepository mockCListRepository;
+  late final GetCList usecase;
 
   setUp(() {
-    mockCListRepository = MockCListRepository();
+    mockCListRepository = MockGetClistRepository();
     usecase = GetCList(mockCListRepository);
   });
 
   final CList cList = CList(
+      icon: "",
       id: 1,
-      resource: "",
+      resourceId: 1,
       event: "event",
       start: DateTime.now(),
       end: DateTime.now(),
@@ -30,8 +33,8 @@ void main() {
     when(mockCListRepository.getClist())
         .thenAnswer((_) async => Right([cList]));
     //act
-    final result = await usecase.call();
+    final result = await usecase.call(Params());
     //arrange
-    expect(result!.isRight(), equals(true));
+    expect(result.isRight(), equals(true));
   });
 }

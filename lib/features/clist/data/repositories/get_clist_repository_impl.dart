@@ -19,7 +19,7 @@ class GetClistRepositoryImpl implements GetClistRepository {
       required this.localDataSource});
 
   @override
-  Future<Either<Failure?, List<CList?>?>>? getClist() async {
+  Future<Either<Failure, List<CList>>> getClist() async {
     bool isConnected;
     if (await networkInfo.isConnected != null) {
       isConnected = (await networkInfo.isConnected)!;
