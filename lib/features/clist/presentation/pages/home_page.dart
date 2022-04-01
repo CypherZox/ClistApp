@@ -21,17 +21,19 @@ class _HomePageState extends State<HomePage> {
       body: Stack(
         children: [
           Container(
-            margin: EdgeInsets.all(0.0),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/Gradient pastel color.jpeg'),
-                fit: BoxFit.cover,
-              ),
-            ),
+            // margin: EdgeInsets.all(0.0),
+            // decoration: BoxDecoration(
+            //   image: DecorationImage(
+            //     image: AssetImage('assets/images/Gradient pastel color.jpeg'),
+            //     fit: BoxFit.cover,
+            //   ),
+            // ),
             child: Padding(
-              padding: EdgeInsets.only(top: 10, left: 15),
+              padding: EdgeInsets.only(
+                top: 10,
+              ),
               child: Align(
-                alignment: Alignment.topLeft,
+                alignment: Alignment.topCenter,
                 child: CachedNetworkImage(
                   imageUrl:
                       'https://clist.by/static/img/logo-48.png?1647735928',
@@ -57,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                     return GlassHome(
                       list: clistState.clist,
                       start: 0.9,
-                      end: 0.1,
+                      end: 0.5,
                       clistRes: resState.cListResources,
                     );
                   }
