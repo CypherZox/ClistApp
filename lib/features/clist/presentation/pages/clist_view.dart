@@ -8,13 +8,13 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../domain/entities/clist_entity.dart';
 
-class GlassHome extends StatelessWidget {
+class CListView extends StatelessWidget {
   final double start;
   final double end;
   final List<CList> list;
   final List<CListResource> clistRes;
 
-  const GlassHome(
+  const CListView(
       {Key? key,
       required this.start,
       required this.end,
@@ -35,7 +35,11 @@ class GlassHome extends StatelessWidget {
                   color: Colors.white,
                   boxShadow: [
                     BoxShadow(
-                        offset: Offset(1, 1), blurRadius: 1, spreadRadius: 2)
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 3,
+                      blurRadius: 5,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
                   ]),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -104,6 +108,7 @@ class GlassHome extends StatelessWidget {
                       child: Row(
                         children: [
                           MaterialButton(
+                            elevation: 3,
                             onPressed: () {
                               _addToCal(
                                   list[index].event,
@@ -114,11 +119,7 @@ class GlassHome extends StatelessWidget {
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(2.1)),
-                              side: BorderSide(
-                                  color: Colors.black,
-                                  width: 1.3,
-                                  style: BorderStyle.solid),
+                                  BorderRadius.all(Radius.circular(13)),
                             ),
                             child: Row(
                               children: [
@@ -130,27 +131,28 @@ class GlassHome extends StatelessWidget {
                                 SizedBox(
                                   width: 1,
                                 ),
-                                Text('add to calendar')
+                                Text('Add to calendar')
                               ],
                             ),
-                            color: Color(0xffFFD700).withOpacity(0.6),
+                            color: Color(0xffFFE347),
                           ),
                           Spacer(),
                           MaterialButton(
+                            elevation: 6,
                             onPressed: () {
                               _launchInBrowser(list[index].href);
                             },
                             shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(2.1)),
+                                  BorderRadius.all(Radius.circular(13)),
                               side: BorderSide(
-                                  color: Colors.black,
-                                  width: 1.3,
+                                  color: Colors.grey,
+                                  width: 0.8,
                                   style: BorderStyle.solid),
                             ),
                             child: Row(
                               children: [
-                                Text('go to '),
+                                Text('Go to '),
                                 CircleAvatar(
                                   backgroundColor: Colors.transparent,
                                   radius: 6,

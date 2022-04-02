@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:clist/features/clist/presentation/pages/home_glass.dart';
+import 'package:clist/features/clist/presentation/pages/clist_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffEFEFEF),
       body: Stack(
         children: [
           Container(
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
             //     fit: BoxFit.cover,
             //   ),
             // ),
+
             child: Padding(
               padding: EdgeInsets.only(
                 top: 10,
@@ -56,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                 return BlocBuilder<res.ClistResourceBloc,
                     res.ClistResourceState>(builder: (context, resState) {
                   if (resState is res.Loaded) {
-                    return GlassHome(
+                    return CListView(
                       list: clistState.clist,
                       start: 0.9,
                       end: 0.5,
