@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:clist/config/constants/api_constants.dart';
-import 'package:clist/core/errors/exception.dart';
-import 'package:clist/features/clist/data/datasources/clist_remote.dart';
-import 'package:clist/features/clist/data/models/clist_model.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:clistApp/config/constants/api_constants.dart';
+import 'package:clistApp/core/errors/exception.dart';
+import 'package:clistApp/features/clist/data/datasources/clist_remote.dart';
+import 'package:clistApp/features/clist/data/models/clist_model.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
@@ -25,20 +25,18 @@ void main() {
         "should return a list of clist when the get requst is called inside the remote data source impl",
         () async {
       //arrange
-      final Map<String, dynamic> jsonMap =
-          json.decode(File('clits.json').readAsStringSync())
-              as Map<String, dynamic>;
+      final jsonMap = json.decode(File('clits.json').readAsStringSync());
       // final cListModel = CListModel.fromJson(jsonMap);
-      final cListModelList =
-          jsonMap["objects"].map((item) => CListModel.fromJson(item)).toList();
+      final List<CListModel> cListModelList = jsonMap["objects"]
+          .map<CListModel>((item) => CListModel.fromJson(item))
+          .toList();
       when(httpClient.get(any, headers: anyNamed("headers"))).thenAnswer(
           (_) async =>
               http.Response((File('clits.json').readAsStringSync()), 200));
       //act
       final response = await clistRemoteDataSourceImpl.getCList();
       //assert
-      verify(httpClient.get(ApiConstants.uri('2022-03-24'),
-          headers: ApiConstants.header));
+      verify(httpClient.get(any, headers: ApiConstants.header)).called(1);
       expect(response, cListModelList);
     });
     test(

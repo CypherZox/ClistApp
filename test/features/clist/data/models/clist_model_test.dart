@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:clist/features/clist/data/models/clist_model.dart';
-import 'package:clist/features/clist/domain/entities/clist_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'dart:io';
+
+import 'package:clistApp/features/clist/data/models/clist_model.dart';
+import 'package:clistApp/features/clist/domain/entities/clist_entity.dart';
 
 void main() {
   final cListModel = CListModel(
@@ -19,9 +20,7 @@ void main() {
   group("fromJson", () {
     test("should return a CList model", () async {
       //arrange
-      final Map<String, dynamic> jsonMap =
-          json.decode(File('clits.json').readAsStringSync())
-              as Map<String, dynamic>;
+      final jsonMap = json.decode(File('clits.json').readAsStringSync());
 
       //act
       final result = new CListModel.fromJson(jsonMap["objects"][0]);
@@ -33,12 +32,12 @@ void main() {
     test("should return a json map", () async {
       //arrange
       Map<String, dynamic> cListMap = {
+        "id": 12068175,
         "duration": 864000,
         "end": "2018-09-17T09:30:00",
         "event": "September Challenge 2018",
         "href": "https://www.codechef.com/SEPT18",
-        "id": 12068175,
-        "resource": "",
+        "resource_id": 1,
         "start": "2018-09-07T09:30:00"
       };
 

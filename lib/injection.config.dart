@@ -16,8 +16,9 @@ import 'features/clist/data/datasources/clist_remote.dart' as _i4;
 import 'features/clist/data/repositories/get_clist_repository_impl.dart'
     as _i12;
 import 'features/clist/domain/repositories/clist_repository.dart' as _i11;
+import 'features/clist/domain/usecases/get_cached_clist.dart' as _i17;
 import 'features/clist/domain/usecases/get_clist.dart' as _i15;
-import 'features/clist/presentation/bloc/clist_bloc.dart' as _i17;
+import 'features/clist/presentation/bloc/clist_bloc.dart' as _i18;
 import 'features/clist_resource/data/datasources/clist_resource_local.dart'
     as _i10;
 import 'features/clist_resource/data/datasources/clist_resource_remote.dart'
@@ -28,8 +29,8 @@ import 'features/clist_resource/domain/repositories/clist_resource_repository.da
     as _i13;
 import 'features/clist_resource/domain/usecases/get_clist_resource.dart'
     as _i16;
-import 'features/clist_resource/presentation/bloc/clist_bloc.dart' as _i18;
-import 'inject_module.dart' as _i19; // ignore_for_file: unnecessary_lambdas
+import 'features/clist_resource/presentation/bloc/clist_bloc.dart' as _i19;
+import 'inject_module.dart' as _i20; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -67,11 +68,14 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i15.GetCList(get<_i11.GetClistRepository>()));
   gh.lazySingleton<_i16.GetCListResource>(
       () => _i16.GetCListResource(get<_i13.GetClistResourcesRepository>()));
-  gh.factory<_i17.ClistBloc>(
-      () => _i17.ClistBloc(getClist: get<_i15.GetCList>()));
-  gh.factory<_i18.ClistResourceBloc>(() =>
-      _i18.ClistResourceBloc(getCListResource: get<_i16.GetCListResource>()));
+  gh.lazySingleton<_i17.GetCachedCListUc>(
+      () => _i17.GetCachedCListUc(get<_i11.GetClistRepository>()));
+  gh.factory<_i18.ClistBloc>(() => _i18.ClistBloc(
+      getClist: get<_i15.GetCList>(),
+      getCachedClist: get<_i17.GetCachedCListUc>()));
+  gh.factory<_i19.ClistResourceBloc>(() =>
+      _i19.ClistResourceBloc(getCListResource: get<_i16.GetCListResource>()));
   return get;
 }
 
-class _$InjectableModule extends _i19.InjectableModule {}
+class _$InjectableModule extends _i20.InjectableModule {}

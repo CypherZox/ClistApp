@@ -1,12 +1,12 @@
-import 'package:clist/core/errors/exception.dart';
-import 'package:clist/core/errors/failures.dart';
-import 'package:clist/core/network/network_info.dart';
-import 'package:clist/features/clist/data/datasources/clist_local.dart';
-import 'package:clist/features/clist/data/datasources/clist_remote.dart';
-import 'package:clist/features/clist/data/models/clist_model.dart';
-import 'package:clist/features/clist/data/repositories/get_clist_repository_impl.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:clistApp/core/errors/exception.dart';
+import 'package:clistApp/core/errors/failures.dart';
+import 'package:clistApp/core/network/network_info.dart';
+import 'package:clistApp/features/clist/data/datasources/clist_local.dart';
+import 'package:clistApp/features/clist/data/datasources/clist_remote.dart';
+import 'package:clistApp/features/clist/data/models/clist_model.dart';
+import 'package:clistApp/features/clist/data/repositories/get_clist_repository_impl.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 

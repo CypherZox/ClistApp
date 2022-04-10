@@ -1,5 +1,6 @@
-import 'package:clist/features/clist/domain/entities/clist_entity.dart';
 import 'package:intl/intl.dart';
+
+import '../../domain/entities/clist_entity.dart';
 
 class CListModel extends CList {
   final int id;
@@ -31,12 +32,12 @@ class CListModel extends CList {
   List<Object> get props => [id, resourceId, event, start, end, duration, href];
   factory CListModel.fromJson(Map<String, dynamic> json) {
     return CListModel(
-        id: json['id'],
-        resourceId: json['resource_id'],
+        id: json['id'] ?? 0,
+        resourceId: json['resource_id'] ?? 0,
         event: json['event'],
         start: DateTime.parse(json['start']),
         end: DateTime.parse(json['end']),
-        duration: json['duration'],
+        duration: json['duration'] ?? 0,
         href: json['href'],
         icon: '');
   }

@@ -1,9 +1,9 @@
-import 'package:clist/features/clist_resource/domain/usecases/get_clist_resource.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../config/constants/api_constants.dart';
 import '../../../../core/errors/failures.dart';
+import '../../domain/usecases/get_clist_resource.dart';
 import 'bloc.dart';
 
 @injectable

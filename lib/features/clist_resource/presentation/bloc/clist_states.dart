@@ -1,5 +1,6 @@
-import 'package:clist/features/clist_resource/domain/entities/clist_resources_entity.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../domain/entities/clist_resources_entity.dart';
 
 class ClistResourceState extends Equatable {
   @override

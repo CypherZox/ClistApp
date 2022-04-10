@@ -11,3 +11,10 @@ class GetClist extends ClistEvent {
   @override
   List<Object> get props => [];
 }
+
+class GetCachedClist extends ClistEvent {
+  GetCachedClist();
+
+  @override
+  List<Object> get props => [];
+}

@@ -1,10 +1,9 @@
 import 'dart:convert';
 
-import 'package:clist/core/errors/exception.dart';
-import 'package:clist/features/clist/data/models/clist_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../core/errors/exception.dart';
 import '../models/clist_model.dart';
 
 abstract class CListResourcesLocalDataSource {

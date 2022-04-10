@@ -1,13 +1,13 @@
-import 'package:clist/core/errors/exception.dart';
-import 'package:clist/core/network/network_info.dart';
-import 'package:clist/core/errors/failures.dart';
-import 'package:clist/features/clist_resource/data/models/clist_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../core/errors/exception.dart';
+import '../../../../core/errors/failures.dart';
+import '../../../../core/network/network_info.dart';
 import '../../domain/repositories/clist_resource_repository.dart';
 import '../datasources/clist_resource_local.dart';
 import '../datasources/clist_resource_remote.dart';
+import '../models/clist_model.dart';
 
 @LazySingleton(as: GetClistResourcesRepository)
 class GetClistResourceRepositoryImpl implements GetClistResourcesRepository {
@@ -22,19 +22,23 @@ class GetClistResourceRepositoryImpl implements GetClistResourcesRepository {
 
   @override
   Future<Either<Failure, List<CListResourceModel>>> getClistResources() async {
+    bool isConnected;
+    if (await networkInfo.isConnected != null) {
+      isConnected = (await networkInfo.isConnected)!;
+    } else {
+      isConnected = false;
+    }
     try {
-      final localClistResources = await remoteDataSource.getCListResources();
-      if (localClistResources == []) {
-        bool isConnected;
-        if (await networkInfo.isConnected != null) {
-          isConnected = (await networkInfo.isConnected)!;
-        } else {
-          isConnected = false;
-        }
+      final localClistResources =
+          await cListResourcesLocalDataSource.getLastCListR();
+      if (localClistResources.length == 0) {
         if (isConnected) {
           try {
             final remoteClistResources =
                 await remoteDataSource.getCListResources();
+
+            await cListResourcesLocalDataSource
+                .cacheCListR(remoteClistResources);
 
             return Right(remoteClistResources);
           } on ServerException {

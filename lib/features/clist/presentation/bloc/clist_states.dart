@@ -1,5 +1,6 @@
-import 'package:clist/features/clist/domain/entities/clist_entity.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../domain/entities/clist_entity.dart';
 
 class ClistState extends Equatable {
   @override
@@ -13,6 +14,12 @@ class Empty extends ClistState {}
 class Loaded extends ClistState {
   final List<CList> clist;
   Loaded({required this.clist});
+  List<Object> get props => [clist];
+}
+
+class CacheLoaded extends ClistState {
+  final List<CList> clist;
+  CacheLoaded({required this.clist});
   List<Object> get props => [clist];
 }
 

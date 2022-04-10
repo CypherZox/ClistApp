@@ -1,4 +1,4 @@
-import 'package:clist/features/clist_resource/domain/entities/clist_resources_entity.dart';
+import '../../domain/entities/clist_resources_entity.dart';
 
 class CListResourceModel extends CListResource {
   final String icon;
