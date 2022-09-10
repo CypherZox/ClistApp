@@ -195,7 +195,7 @@ Project Link: [https://github.com/CypherZox/ClistApp](https://github.com/CypherZ
 
 ## Acknowledgments
 
-- [Check out the Clean Architecture! ](https://www.youtube.com/watch?v=3681ZYbDSSk&t=4984s)
+- [Check out the Clean Architecture! ](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 - [Flutter TDD and Clean Architecture course (a little outdated)](https://www.youtube.com/watch?v=KjE2IDphA_U&list=PLB6lc7nQ1n4iYGE_khpXRdJkJEp9WOech)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
