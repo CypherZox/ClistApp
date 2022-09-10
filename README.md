@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/CypherZox/ClistApp">
-    <img src="https://play-lh.googleusercontent.com/d91JkGzJWYNnyMBZlArlMHpba6KOUKdaR1bIksAHkm-U8eAVmM7asEoS891n1IZEXkUd=w480-h960-rw" width="150" class="center" alt="Logo" width="80" height="80">
+    <img src="https://play-lh.googleusercontent.com/d91JkGzJWYNnyMBZlArlMHpba6KOUKdaR1bIksAHkm-U8eAVmM7asEoS891n1IZEXkUd=w480-h960-rw" width="80" class="center" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">ClistApp</h3>
