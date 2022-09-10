@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "57280282949",
+    "project_id": "clistapp-fc13a",
+    "storage_bucket": "clistapp-fc13a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57280282949:android:a1215cfd5ad724ff20be2c",
+        "android_client_info": {
+          "package_name": "com.hanafedeil.clist.by"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57280282949-l78n2i0fgb3fo8sbkvlm47gkffh5udsh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hanafedeil.clist.by",
+            "certificate_hash": "45ab7bbea0ea3b1bdd6cbc2d03887c124787c07d"
+          }
+        },
+        {
+          "client_id": "57280282949-i12sje9obaaveeqs0jm2o3g572ms7vp9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJvpz-LJXujOLbqD6aP1MabziL2N51VlQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "57280282949-i12sje9obaaveeqs0jm2o3g572ms7vp9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

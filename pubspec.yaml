@@ -48,6 +48,7 @@ dependencies:
   cached_network_image: ^3.2.0
   add_2_calendar: ^2.1.2
   url_launcher: ^6.0.20
+  flutter_dotenv: ^5.0.2
   
 
 dev_dependencies:
@@ -81,6 +82,7 @@ flutter:
     - assets/
     - assets/icons/icons8-calendar-24.png
     - assets/images/logo-48.png
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

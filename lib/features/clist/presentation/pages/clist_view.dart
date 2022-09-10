@@ -29,205 +29,144 @@ class CListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () async =>
-          BlocProvider.of<ClistBloc>(context).add(GetClist()),
-      child: ListView.builder(
-          itemCount: list.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        spreadRadius: 3,
-                        blurRadius: 5,
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
-                    ]),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  child: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 4.0),
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                radius: 17,
-                                child: ClipOval(
-                                  child: CachedNetworkImage(
-                                    imageUrl:
-                                        'https://clist.by${_getIconById(list[index].resourceId, clistRes)}',
-                                    width: 15,
-                                    height: 15,
-                                    errorWidget: (context, url, error) =>
-                                        new Icon(Icons.error),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Container(
-                            width: 230,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  list[index].event,
-                                  textAlign: TextAlign.left,
-                                  maxLines: 5,
-                                  style: AppText.regularStyle.copyWith(
-                                      fontSize: 14,
-                                      fontFamily: 'OpenSans-SemiBold'),
-                                ),
-                                SizedBox(
-                                  height: 6,
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                      text: "Start: ",
-                                      style: AppText.regularStyle.copyWith(
-                                          fontSize: 12,
-                                          fontFamily: 'OpenSans-SemiBold',
-                                          color: AppColors.secondaryText),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: DateFormat('yyyy-MM-dd')
-                                              .format(list[index].start),
-                                          style: AppText.regularStyle.copyWith(
-                                            fontSize: 12,
-                                          ),
-                                        )
-                                      ]),
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                      text: "Duration: ",
-                                      style: AppText.regularStyle.copyWith(
-                                          fontSize: 12,
-                                          fontFamily: 'OpenSans-SemiBold',
-                                          color: AppColors.secondaryText),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: _mapDurationToDaysOrMins(
-                                              list[index].duration),
-                                          style: AppText.regularStyle.copyWith(
-                                            fontSize: 12,
-                                          ),
-                                        )
-                                      ]),
-                                ),
-                                // Text(
-                                //   "Start: ${DateFormat('yyyy-MM-dd').format(list[index].start)}",
-                                //   textAlign: TextAlign.left,
-                                //   style: AppText.regularStyle
-                                //         .copyWith(fontSize: 12, fontFamily: 'OpenSans-SemiBold',color: AppColors.secondaryText),
-                                // ),
-                                // Text(
-                                //     "Duration: ${_mapDurationToDaysOrMins(list[index].duration)}",
-                                //     textAlign: TextAlign.left),
-                                SizedBox(
-                                  height: 7,
-                                ),
-                                CountdownTimer(
-                                  endTime:
-                                      list[index].end.millisecondsSinceEpoch,
-                                  textStyle: AppText.regularStyle.copyWith(
-                                    fontSize: 12,
-                                    fontFamily: 'OpenSans-SemiBold',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
+    return Theme(
+      data: ThemeData(
+        unselectedWidgetColor: AppColors.secondary,
+        primaryColor: AppColors.secondary,
+        primarySwatch: MaterialColor(0xffEF403B, <int, Color>{
+          50: AppColors.secondary,
+          100: AppColors.secondary,
+          200: AppColors.secondary,
+          300: AppColors.secondary,
+          400: AppColors.secondary,
+          500: AppColors.secondary,
+          600: AppColors.secondary,
+          700: AppColors.secondary,
+          800: AppColors.secondary,
+          900: AppColors.secondary,
+        }),
+      ),
+      child: RefreshIndicator(
+        color: AppColors.secondary,
+        onRefresh: () async =>
+            BlocProvider.of<ClistBloc>(context).add(GetClist()),
+        child: ListView.builder(
+            itemCount: list.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 3,
+                          blurRadius: 5,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ]),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            MaterialButton(
-                              elevation: 3,
-                              onPressed: () {
-                                _addToCal(
-                                    list[index].event,
-                                    list[index].href,
-                                    list[index].start,
-                                    list[index].end,
-                                    list[index].duration);
-                              },
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(13)),
+                            Padding(
+                              padding: EdgeInsets.only(top: 4.0),
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.transparent,
+                                  radius: 17,
+                                  child: ClipOval(
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          'https://clist.by${_getIconById(list[index].resourceId, clistRes)}',
+                                      width: 15,
+                                      height: 15,
+                                      errorWidget: (context, url, error) =>
+                                          new Icon(Icons.error),
+                                    ),
+                                  ),
+                                ),
                               ),
-                              child: Row(
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Container(
+                              width: 230,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Image.asset(
-                                    'assets/icons/icons8-calendar-24.png',
-                                    width: 13,
-                                    height: 13,
+                                  Text(
+                                    list[index].event,
+                                    textAlign: TextAlign.left,
+                                    maxLines: 5,
+                                    style: AppText.regularStyle.copyWith(
+                                        fontSize: 14,
+                                        fontFamily: 'OpenSans-SemiBold'),
                                   ),
                                   SizedBox(
-                                    width: 1,
+                                    height: 6,
                                   ),
-                                  Text(
-                                    'Add to calendar',
-                                    maxLines: 4,
-                                    style: AppText.regularStyle
-                                        .copyWith(fontSize: 12),
-                                  )
-                                ],
-                              ),
-                              color: Color(0xffFFE347),
-                            ),
-                            Spacer(),
-                            MaterialButton(
-                              elevation: 6,
-                              onPressed: () {
-                                _launchInBrowser(list[index].href);
-                              },
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(13)),
-                                side: BorderSide(
-                                    color: Colors.grey,
-                                    width: 0.8,
-                                    style: BorderStyle.solid),
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Go to ',
-                                    style: AppText.regularStyle
-                                        .copyWith(fontSize: 12),
+                                  RichText(
+                                    text: TextSpan(
+                                        text: "Start: ",
+                                        style: AppText.regularStyle.copyWith(
+                                            fontSize: 12,
+                                            fontFamily: 'OpenSans-SemiBold',
+                                            color: AppColors.secondaryText),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text: DateFormat('yyyy-MM-dd')
+                                                .format(list[index].start),
+                                            style:
+                                                AppText.regularStyle.copyWith(
+                                              fontSize: 12,
+                                            ),
+                                          )
+                                        ]),
                                   ),
-                                  CircleAvatar(
-                                    backgroundColor: Colors.transparent,
-                                    radius: 6,
-                                    child: ClipOval(
-                                      child: CachedNetworkImage(
-                                        imageUrl:
-                                            'https://clist.by${_getIconById(list[index].resourceId, clistRes)}',
-                                        width: 9,
-                                        height: 9,
-                                        errorWidget: (context, url, error) =>
-                                            new Icon(Icons.error),
-                                      ),
+                                  RichText(
+                                    text: TextSpan(
+                                        text: "Duration: ",
+                                        style: AppText.regularStyle.copyWith(
+                                            fontSize: 12,
+                                            fontFamily: 'OpenSans-SemiBold',
+                                            color: AppColors.secondaryText),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text: _mapDurationToDaysOrMins(
+                                                list[index].duration),
+                                            style:
+                                                AppText.regularStyle.copyWith(
+                                              fontSize: 12,
+                                            ),
+                                          )
+                                        ]),
+                                  ),
+                                  // Text(
+                                  //   "Start: ${DateFormat('yyyy-MM-dd').format(list[index].start)}",
+                                  //   textAlign: TextAlign.left,
+                                  //   style: AppText.regularStyle
+                                  //         .copyWith(fontSize: 12, fontFamily: 'OpenSans-SemiBold',color: AppColors.secondaryText),
+                                  // ),
+                                  // Text(
+                                  //     "Duration: ${_mapDurationToDaysOrMins(list[index].duration)}",
+                                  //     textAlign: TextAlign.left),
+                                  SizedBox(
+                                    height: 7,
+                                  ),
+                                  CountdownTimer(
+                                    endTime:
+                                        list[index].end.millisecondsSinceEpoch,
+                                    textStyle: AppText.regularStyle.copyWith(
+                                      fontSize: 12,
+                                      fontFamily: 'OpenSans-SemiBold',
                                     ),
                                   ),
                                 ],
@@ -235,14 +174,96 @@ class CListView extends StatelessWidget {
                             ),
                           ],
                         ),
-                      )
-                    ],
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            children: [
+                              MaterialButton(
+                                elevation: 3,
+                                onPressed: () {
+                                  _addToCal(
+                                      list[index].event,
+                                      list[index].href,
+                                      list[index].start,
+                                      list[index].end,
+                                      list[index].duration);
+                                },
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(13)),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Image.asset(
+                                      'assets/icons/icons8-calendar-24.png',
+                                      width: 13,
+                                      height: 13,
+                                    ),
+                                    SizedBox(
+                                      width: 1,
+                                    ),
+                                    Text(
+                                      'Add to calendar',
+                                      maxLines: 4,
+                                      style: AppText.regularStyle
+                                          .copyWith(fontSize: 12),
+                                    )
+                                  ],
+                                ),
+                                color: Color(0xffFFE347),
+                              ),
+                              Spacer(),
+                              MaterialButton(
+                                elevation: 6,
+                                onPressed: () {
+                                  _launchInBrowser(list[index].href);
+                                },
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(13)),
+                                  side: BorderSide(
+                                      color: Colors.grey,
+                                      width: 0.8,
+                                      style: BorderStyle.solid),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'Go to ',
+                                      style: AppText.regularStyle
+                                          .copyWith(fontSize: 12),
+                                    ),
+                                    CircleAvatar(
+                                      backgroundColor: Colors.transparent,
+                                      radius: 6,
+                                      child: ClipOval(
+                                        child: CachedNetworkImage(
+                                          imageUrl:
+                                              'https://clist.by${_getIconById(list[index].resourceId, clistRes)}',
+                                          width: 9,
+                                          height: 9,
+                                          errorWidget: (context, url, error) =>
+                                              new Icon(Icons.error),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
+                  // height: 190,
                 ),
-                // height: 190,
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 

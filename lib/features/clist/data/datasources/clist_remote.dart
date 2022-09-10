@@ -21,6 +21,7 @@ class ClistRemoteDataSourceImpl implements ClistRemoteDataSource {
     var now = new DateTime.now();
     var formatter = new DateFormat('yyyy-MM-dd');
     String formattedDate = formatter.format(now);
+    print(formattedDate);
     final http.Response response = await httpClient.get(
       ApiConstants.uri(formattedDate),
       headers: ApiConstants.header,

@@ -1,10 +1,12 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class ApiConstants {
   static Uri uri(String startLimit) => Uri.parse(
       "https://clist.by/api/v2/contest/?limit=100&start__gt=$startLimit&order_by=event");
   static Uri uriResource =
       Uri.parse("https://clist.by/api/v2/resource/?limit=300");
   static String authorization =
-      "ApiKey hanafedeil:90f6865484587566caee22ab1734f5a54e043947";
+      dotenv.get('APIKEY', fallback: 'API_KEY not found');
   static Map<String, String> header = {
     'Content-Type': 'application/json',
     'Authorization': authorization

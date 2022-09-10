@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'features/clist/presentation/bloc/bloc.dart';
 import 'features/clist/presentation/pages/home_page.dart';
@@ -9,6 +11,8 @@ import 'injection.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ConfigureInjection();
+  await dotenv.load(fileName: ".env");
+
   runApp(
     MyApp(),
   );
@@ -22,13 +26,14 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void initState() {
+    SystemChrome.setEnabledSystemUIOverlays([]);
     super.initState();
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 

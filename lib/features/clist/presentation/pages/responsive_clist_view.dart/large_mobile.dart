@@ -2,6 +2,7 @@ import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:intl/intl.dart';
@@ -36,7 +37,7 @@ class CListLView extends StatelessWidget {
           itemCount: list.length,
           itemBuilder: (context, index) {
             return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
