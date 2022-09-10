@@ -124,13 +124,12 @@ To run the app:
   flutter run
 ```
 
-You can download the app from google play here:
- <br> <a href="https://play.google.com/store/apps/details?id=com.hanafedeil.clist.by"> <img src="https://cdn.freebiesupply.com/logos/large/2x/google-play-badge-logo-png-transparent.png" width="300" ></a>
+
 
 ### Installation
 
 You can download the app from google play here:
- <br> <a href="https://play.google.com/store/apps/details?id=com.hanafedeil.clist.by"> <img src="https://cdn.freebiesupply.com/logos/large/2x/google-play-badge-logo-png-transparent.png" width="300" ></a>
+ <br> <a href="https://play.google.com/store/apps/details?id=com.hanafedeil.clist.by"> <img src="https://cdn.freebiesupply.com/logos/large/2x/google-play-badge-logo-png-transparent.png" width="250" ></a>
 
 <!-- USAGE EXAMPLES -->
 
