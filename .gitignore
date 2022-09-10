@@ -8,7 +8,6 @@
 .buildlog/
 .history
 .svn/
-.env
 # IntelliJ related
 *.iml
 *.ipr
@@ -30,7 +29,7 @@
 .pub-cache/
 .pub/
 /build/
-
+/Users/hanafedeil/projects/ClistApp/.env
 # Web related
 lib/generated_plugin_registrant.dart
 
