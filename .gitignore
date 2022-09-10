@@ -8,7 +8,7 @@
 .buildlog/
 .history
 .svn/
-
+.env
 # IntelliJ related
 *.iml
 *.ipr
@@ -46,3 +46,4 @@ app.*.map.json
 /android/app/release
 android/upload-keystore.jks
 android/key.properties
+
