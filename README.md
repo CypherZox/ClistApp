@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/CypherZox/ClistApp">
-    <img src="https://github.com/CypherZox/ClistApp/blob/master/appstore.png" alt="Logo" width="80" height="80">
+    <img src="https://play-lh.googleusercontent.com/d91JkGzJWYNnyMBZlArlMHpba6KOUKdaR1bIksAHkm-U8eAVmM7asEoS891n1IZEXkUd=w480-h960-rw" width="150" class="center" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">ClistApp</h3>
@@ -125,12 +125,12 @@ To run the app:
 ```
 
 You can download the app from google play here:
-<a href="https://play.google.com/store/apps/details?id=com.hanafedeil.clist.by"> <img src="https://cdn.freebiesupply.com/logos/large/2x/google-play-badge-logo-png-transparent.png" width="80" ></a>
+ <br> <a href="https://play.google.com/store/apps/details?id=com.hanafedeil.clist.by"> <img src="https://cdn.freebiesupply.com/logos/large/2x/google-play-badge-logo-png-transparent.png" width="300" ></a>
 
 ### Installation
 
 You can download the app from google play here:
-<a href="https://play.google.com/store/apps/details?id=com.hanafedeil.clist.by"> <img src="https://cdn.freebiesupply.com/logos/large/2x/google-play-badge-logo-png-transparent.png" width="80" ></a>
+ <br> <a href="https://play.google.com/store/apps/details?id=com.hanafedeil.clist.by"> <img src="https://cdn.freebiesupply.com/logos/large/2x/google-play-badge-logo-png-transparent.png" width="300" ></a>
 
 <!-- USAGE EXAMPLES -->
 
