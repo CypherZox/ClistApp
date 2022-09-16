@@ -137,8 +137,8 @@ You can download the app from google play here:
 
 - Clean Architecture.
 - TDD with [Mockito](https://pub.dev/packages/mockito).
-- Dependecy injection (with [get it](https://pub.dev/packages/get_it) and [build runner](https://pub.dev/packages/build_runner)).
-- Statem management with [BLoC](https://bloclibrary.dev/)
+- Dependency injection (with [get it](https://pub.dev/packages/get_it) and [build runner](https://pub.dev/packages/build_runner)).
+- State management with [BLoC](https://bloclibrary.dev/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
