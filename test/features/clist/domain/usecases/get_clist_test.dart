@@ -27,7 +27,7 @@ void main() {
       end: DateTime.now(),
       duration: 10,
       href: "href");
-  test("Get List shoul return a list of Clist items from repository ",
+  test("Get List should return a list of Clist items from repository ",
       () async {
     //assert
     when(mockCListRepository.getClist())

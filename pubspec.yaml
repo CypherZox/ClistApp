@@ -40,6 +40,7 @@ dependencies:
   bloc: ^8.0.1
   flutter_countdown_timer: ^4.1.0
   cached_network_image: ^3.2.0
+  firebase_auth: ^3.9.0
 
 dev_dependencies:
   injectable_generator:

@@ -8,7 +8,11 @@
 .buildlog/
 .history
 .svn/
+<<<<<<< Updated upstream
 
+=======
+.env
+>>>>>>> Stashed changes
 # IntelliJ related
 *.iml
 *.ipr
@@ -30,17 +34,25 @@
 .pub-cache/
 .pub/
 /build/
+<<<<<<< Updated upstream
 
+=======
+.env
+>>>>>>> Stashed changes
 # Web related
 lib/generated_plugin_registrant.dart
-
+.env
 # Symbolication related
 app.*.symbols
-
+.env
 # Obfuscation related
 app.*.map.json
-
+.env
 # Android Studio will place build artifacts here
 /android/app/debug
 /android/app/profile
 /android/app/release
+android/upload-keystore.jks
+android/key.properties
+
+.env

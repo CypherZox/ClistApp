@@ -9,14 +9,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
 import 'get_clist_repository_impl_test.mocks.dart';
 
-// class MockClitRemoteDataSource extends Mock implements ClistRemoteDataSource {}
-
-// class MockLocalDataSource extends Mock implements CListLocalDataSource {}
-
-// class MockNetworkInfo extends Mock implements NetworkInfo {}
 @GenerateMocks([
   CListLocalDataSource,
   NetworkInfo
